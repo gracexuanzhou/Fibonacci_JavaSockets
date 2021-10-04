@@ -45,7 +45,7 @@ public class FiboClient {
     	FiboClient client =  new FiboClient();
     	client.startConnection("127.0.0.1", 9991);
     	client.sendMessage();
-    	client.stopConnection();
+    	//client.stopConnection();
     }
 }
 
