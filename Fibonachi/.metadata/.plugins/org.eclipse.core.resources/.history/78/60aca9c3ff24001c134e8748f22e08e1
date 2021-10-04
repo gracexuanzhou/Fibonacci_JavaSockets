@@ -1,0 +1,105 @@
+import java.io.*;
+import java.net.*;
+import java.util.*;
+
+
+
+/*
+import java.io.*;
+import java.net.InetAddress;
+import java.net.InetSocketAddress;
+import java.net.Socket;
+
+public class FiboClient {
+
+    static Socket socket;
+    static BufferedReader bufferedReader;
+    static BufferedReader bufferedReader1;
+    static OutputStream outputStream;
+    static InputStream inputStream;
+    static PrintWriter printWriter;
+
+    public static void main(String[] args) throws IOException{
+        socket = new Socket();
+        socket.connect(new InetSocketAddress(InetAddress.getLocalHost(),5757), 2000);
+
+        outputStream = socket.getOutputStream();
+        printWriter = new PrintWriter(outputStream,true);
+
+        inputStream = socket.getInputStream();
+        bufferedReader = new BufferedReader(new InputStreamReader(socket.getInputStream()));
+
+        System.out.println("Server is ready to work...");
+
+        System.out.print("Write INTEGER to calculate Fibonachi: ");
+
+        bufferedReader1 = new BufferedReader(new InputStreamReader(System.in));
+        String s = bufferedReader1.readLine();
+        printWriter.println(s);
+
+        String calcResult = bufferedReader.readLine();
+        System.out.println(calcResult);
+
+    }
+}*/
+
+/*
+public class FiboClient {
+	public static void main(String args[]) throws IOException {
+		
+		int number,temp;
+		Scanner sc = new Scanner(System.in);
+		Socket s = new Socket("127.0.0.1",1234);
+		Scanner sc1 = new Scanner(s.getInputStream());
+		System.out.println("Enter any number:");
+		number = sc.nextInt();
+		PrintStream p = new PrintStream(s.getOutputStream());
+		p.println(number);
+		temp = sc1.nextInt();
+		System.out.println(temp);
+	}
+}*/
+
+public class FiboClient {
+
+    private Socket clientSocket;
+    private PrintWriter out;
+    private BufferedReader in;
+    private BufferedReader input;
+
+    public void startConnection(String ip, int port) throws UnknownHostException, IOException {
+        clientSocket = new Socket(ip, port);
+        out = new PrintWriter(clientSocket.getOutputStream(), true);
+        in = new BufferedReader(new InputStreamReader(clientSocket.getInputStream()));
+
+    }
+
+    public void sendMessage() throws IOException {
+
+
+        System.out.println("Server is ready to work...");
+        System.out.print("Write INTEGER to calculate Fibonachi: ");
+
+        input = new BufferedReader(new InputStreamReader(System.in));
+        String s = input.readLine();
+        out.println(s);
+
+        String calcResult = in.readLine();
+        System.out.println(calcResult);
+    }
+
+    public void stopConnection() throws IOException {
+        in.close();
+        out.close();
+        clientSocket.close();
+    }
+    
+    public static void main (String[] args) throws UnknownHostException, IOException {
+    	FiboClient client =  new FiboClient();
+    	client.startConnection("127.0.0.1", 9991);
+    	client.sendMessage();
+    	client.stopConnection();
+    }
+}
+
+

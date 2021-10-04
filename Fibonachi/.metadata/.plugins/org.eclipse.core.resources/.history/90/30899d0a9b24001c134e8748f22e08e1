@@ -1,0 +1,69 @@
+import java.io.*;
+import java.net.*;
+
+public class FiboClient {
+
+    static Socket socket;
+    static BufferedReader bufferedReader;
+    static BufferedReader bufferedReader1;
+    static OutputStream outputStream;
+    static InputStream inputStream;
+    static PrintWriter printWriter;
+
+    public static void main(String[] args) throws IOException{
+        socket = new Socket();
+        socket.connect(new InetSocketAddress(InetAddress.getLocalHost(),6622), 2000);
+
+        outputStream = socket.getOutputStream();
+        printWriter = new PrintWriter(outputStream,true);
+
+        inputStream = socket.getInputStream();
+        bufferedReader = new BufferedReader(new InputStreamReader(socket.getInputStream()));
+
+        System.out.println("Server is ready to work...");
+
+        System.out.print("Write INTEGER to calculate Fibonachi: ");
+
+        bufferedReader1 = new BufferedReader(new InputStreamReader(System.in));
+        String s = bufferedReader1.readLine();
+        printWriter.println(s);
+
+        String calcResult = bufferedReader.readLine();
+        System.out.println(calcResult);
+
+    }
+}
+	/*
+    private Socket clientSocket;
+    private PrintWriter out;
+    private BufferedReader in;
+
+    public void startConnection(String ip, int port) throws UnknownHostException, IOException {
+        clientSocket = new Socket(ip, port);
+        out = new PrintWriter(clientSocket.getOutputStream(), true);
+        in = new BufferedReader(new InputStreamReader(clientSocket.getInputStream()));
+    }
+
+    public String sendMessage(String msg) throws IOException {
+        
+        System.out.println("Server is ready to work...");
+        System.out.print("Write INTEGER to calculate Fibonachi: ");
+        out.println(msg);
+        String number = in.readLine();
+        return number;
+    }
+
+    public void stopConnection() throws IOException {
+        in.close();
+        out.close();
+        clientSocket.close();
+    }
+    
+    public static void main (String[] args) throws UnknownHostException, IOException {
+    	FiboClient client =  new FiboClient();
+    	client.startConnection("127.0.0.1", 9998);
+    	String str1=args[0];
+    	client.sendMessage(str1);
+    }
+}*/
+

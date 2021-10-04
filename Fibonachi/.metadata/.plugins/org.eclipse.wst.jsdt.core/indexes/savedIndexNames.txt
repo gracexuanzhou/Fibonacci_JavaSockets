@@ -1,0 +1,7 @@
+INDEX VERSION 1.4+/Users/xuanzhou/Desktop/ASML/.metadata/.plugins/org.eclipse.wst.jsdt.core/indexes
+3180021795.index
+674542078.index
+1338825950.index
+4077657309.index
+471461080.index
+1969471082.index

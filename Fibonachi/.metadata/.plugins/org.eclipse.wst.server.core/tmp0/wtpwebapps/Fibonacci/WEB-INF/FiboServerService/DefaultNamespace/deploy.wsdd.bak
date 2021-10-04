@@ -1,0 +1,34 @@
+<!-- Use this file to deploy some handlers/chains and services      -->
+<!-- Two ways to do this:                                           -->
+<!--   java org.apache.axis.client.AdminClient deploy.wsdd          -->
+<!--      after the axis server is running                          -->
+<!-- or                                                             -->
+<!--   java org.apache.axis.utils.Admin client|server deploy.wsdd   -->
+<!--      from the same directory that the Axis engine runs         -->
+
+<deployment
+    xmlns="http://xml.apache.org/axis/wsdd/"
+    xmlns:java="http://xml.apache.org/axis/wsdd/providers/java">
+
+  <!-- Services from FiboServerService WSDL service -->
+
+  <service name="FiboServer" provider="java:RPC" style="wrapped" use="literal">
+      <parameter name="wsdlTargetNamespace" value="http://DefaultNamespace"/>
+      <parameter name="wsdlServiceElement" value="FiboServerService"/>
+      <parameter name="schemaQualified" value="http://DefaultNamespace"/>
+      <parameter name="wsdlServicePort" value="FiboServer"/>
+      <parameter name="className" value="DefaultNamespace.FiboServerSoapBindingImpl"/>
+      <parameter name="wsdlPortType" value="FiboServer"/>
+      <parameter name="typeMappingVersion" value="1.2"/>
+      <operation name="main" qname="operNS:main" xmlns:operNS="http://DefaultNamespace" soapAction="" >
+        <parameter qname="pns:args" xmlns:pns="http://DefaultNamespace" type="tns:string" xmlns:tns="http://www.w3.org/2001/XMLSchema"/>
+      </operation>
+      <operation name="start" qname="operNS:start" xmlns:operNS="http://DefaultNamespace" soapAction="" >
+        <parameter qname="pns:port" xmlns:pns="http://DefaultNamespace" type="tns:int" xmlns:tns="http://www.w3.org/2001/XMLSchema"/>
+      </operation>
+      <operation name="stop" qname="operNS:stop" xmlns:operNS="http://DefaultNamespace" soapAction="" >
+      </operation>
+      <parameter name="allowedMethods" value="stop start main"/>
+
+  </service>
+</deployment>

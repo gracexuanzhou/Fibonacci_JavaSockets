@@ -1,0 +1,77 @@
+import java.net.*;
+import java.io.*;
+
+
+public class FiboServer {
+
+    static ServerSocket serverSocket;
+    static Socket socket;
+    static BufferedReader bufferedReader;
+    static PrintWriter printWriter;
+
+    public static void main(String[] args) throws IOException {
+
+        serverSocket = new ServerSocket(6633);
+        socket = serverSocket.accept();
+
+        InputStream inputStream = socket.getInputStream();
+        bufferedReader = new BufferedReader(new InputStreamReader(inputStream));
+
+        OutputStream outputStream = socket.getOutputStream();
+        printWriter = new PrintWriter(outputStream,true);
+
+        System.out.println("The server started, waiting client actions...");
+
+
+        if(true){
+            System.out.println(("Wait a little bit..."));
+            String input = bufferedReader.readLine();
+            System.out.println(input);
+            Integer value = Integer.valueOf(input);
+            System.out.println(value);
+            printWriter.println("Your fibonachi number is: " + Fibonachi.fibonachi(value));
+        }
+    }
+
+}
+/*
+public class  FiboServer{
+	private ServerSocket serverSocket;
+	private Socket clientSocket;
+    private PrintWriter output;
+    private BufferedReader input;
+    
+    public void startServer(int port) throws IOException {
+    	//创建一个serverSocket object, binding端口
+    	serverSocket = new ServerSocket(port);
+    	//调用accept()方法,监听客户端请求
+    	clientSocket = serverSocket.accept();
+    	//获取输入流,读取客户端信息
+    	output = new PrintWriter(clientSocket.getOutputStream(),true);
+    	input = new BufferedReader(new InputStreamReader(clientSocket.getInputStream()));//获取输入流
+       	System.out.println("The server succussful started!");
+       	
+    	if(true) {
+    		System.out.println("");
+    		String in = input.readLine();
+    		System.out.println(in);
+    		Integer num = Integer.valueOf(in);
+    		System.out.println(num);
+    		output.println("The fibonachi number is :" + Fibonachi.fibonachi(num) );
+    	
+    	}     	   	
+    }
+    
+    public void stop() throws IOException {
+        input.close();
+        output.close();
+        clientSocket.close();
+        serverSocket.close();
+    }
+    
+    public static void main(String[] args) throws IOException {
+        FiboServer server=new FiboServer();
+        server.startServer(9998);
+    }
+	
+}*/

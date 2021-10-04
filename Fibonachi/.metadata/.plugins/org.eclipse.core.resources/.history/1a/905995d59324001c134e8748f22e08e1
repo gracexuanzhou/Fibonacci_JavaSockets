@@ -1,0 +1,36 @@
+import java.net.*;
+import java.io.*;
+
+
+public class FiboServer {
+
+    static ServerSocket serverSocket;
+    static Socket socket;
+    static BufferedReader bufferedReader;
+    static PrintWriter printWriter;
+
+    public static void main(String[] args) throws IOException {
+
+        serverSocket = new ServerSocket(6622);
+        socket = serverSocket.accept();
+
+        InputStream inputStream = socket.getInputStream();
+        bufferedReader = new BufferedReader(new InputStreamReader(inputStream));
+
+        OutputStream outputStream = socket.getOutputStream();
+        printWriter = new PrintWriter(outputStream,true);
+
+        System.out.println("The server started, waiting client actions...");
+
+
+        if(true){
+            System.out.println(("Wait a little bit..."));
+            String input = bufferedReader.readLine();
+            System.out.println(input);
+            Integer value = Integer.valueOf(input);
+            System.out.println(value);
+            printWriter.println("Your fibonachi number is: " + Fibonachi.fibonachi(value));
+        }
+    }
+
+}
