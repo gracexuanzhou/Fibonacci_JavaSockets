@@ -4,8 +4,8 @@ import java.io.*;
 
 public class FiboServer {
 
-	private ServerSocket serverSocket;
-	private Socket clientSocket;
+    private ServerSocket serverSocket;
+    private Socket clientSocket;
     private static PrintWriter output;
     private static BufferedReader input;
     
